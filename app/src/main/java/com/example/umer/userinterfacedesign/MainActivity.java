@@ -3,8 +3,10 @@ package com.example.umer.userinterfacedesign;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.provider.ContactsContract;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SharedPreferences mySharedPref=this.getSharedPreferences("mysp",0);
+        SharedPreferences.Editor editor=mySharedPref.edit();
+        editor.putBoolean("UserLogedIn",true);
+        editor.commit();
+        mySharedPref.getBoolean("UserLogedIn",false);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button btn=findViewById(R.id.mybtn);
